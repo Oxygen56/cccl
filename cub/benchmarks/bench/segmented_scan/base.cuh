@@ -95,7 +95,7 @@ static void bench_impl(nvbench::state& state, nvbench::type_list<T, OffsetT>)
 
   state.add_element_count(elements, "Elements");
   state.add_global_memory_reads<T>(elements);
-  state.add_global_memory_reads<offset_t>(num_segments + 1);
+  state.add_global_memory_reads<offset_t>(num_segments + 1); // NOLINT(bugprone-misplaced-widening-cast)
   state.add_global_memory_writes<T>(elements);
 
   int num_segments_per_worker = static_cast<int>(state.get_int64("SegmentsPerWorker{io}"));

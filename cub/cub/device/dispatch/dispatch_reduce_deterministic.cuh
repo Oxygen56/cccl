@@ -359,6 +359,7 @@ CUB_RUNTIME_FUNCTION _CCCL_FORCEINLINE cudaError_t dispatch(
                }))
 #endif // _CCCL_HOSTED() && defined(CUB_DEBUG_LOG)
 
+  // NOLINTNEXTLINE(bugprone-misplaced-widening-cast)
   const auto tile_items =
     static_cast<OffsetT>(active_policy.single_tile.threads_per_block * active_policy.single_tile.items_per_thread);
 

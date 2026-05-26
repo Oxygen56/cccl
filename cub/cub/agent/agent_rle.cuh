@@ -382,7 +382,7 @@ struct AgentRle
       T tile_successor_item;
       if (threadIdx.x == BLOCK_THREADS - 1)
       {
-        tile_successor_item = d_in[tile_offset + TILE_ITEMS];
+        tile_successor_item = d_in[tile_offset + TILE_ITEMS]; // NOLINT(bugprone-misplaced-widening-cast)
       }
 
       BlockDiscontinuityT(temp_storage.aliasable.scan_storage.discontinuity)
@@ -408,7 +408,7 @@ struct AgentRle
       T tile_successor_item;
       if (threadIdx.x == BLOCK_THREADS - 1)
       {
-        tile_successor_item = d_in[tile_offset + TILE_ITEMS];
+        tile_successor_item = d_in[tile_offset + TILE_ITEMS]; // NOLINT(bugprone-misplaced-widening-cast)
       }
 
       // Get the last item from the previous tile

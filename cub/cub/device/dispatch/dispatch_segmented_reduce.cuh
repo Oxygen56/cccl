@@ -804,7 +804,7 @@ CUB_RUNTIME_FUNCTION _CCCL_FORCEINLINE auto dispatch_fixed_size(
         return error;
       }
 
-      d_in += num_segments_per_invocation * segment_size;
+      d_in += num_segments_per_invocation * segment_size; // NOLINT(bugprone-misplaced-widening-cast)
       d_out += num_segments_per_invocation;
 
       if (const auto error = CubDebug(cudaPeekAtLastError()))
@@ -915,7 +915,7 @@ CUB_RUNTIME_FUNCTION _CCCL_FORCEINLINE auto dispatch_fixed_size(
       return error;
     }
 
-    d_in += num_segments_per_invocation * segment_size;
+    d_in += num_segments_per_invocation * segment_size; // NOLINT(bugprone-misplaced-widening-cast)
     d_out += num_segments_per_invocation;
 
     if (const auto error = CubDebug(cudaPeekAtLastError()))

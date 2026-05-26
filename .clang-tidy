@@ -251,7 +251,6 @@ CheckOptions:
   readability-simplify-boolean-expr.ChainedConditionalReturn: 'true'
   readability-simplify-boolean-expr.ChainedConditionalAssignment: 'true'
   bugprone-dangling-handle.HandleClasses: '::cuda::std::span;::cuda::std::mdspan'
-  bugprone-misplaced-widening-cast.CheckImplicitCasts: 'true'
   bugprone-unused-return-value.AllowCastToVoid: 'true'
   readability-enum-initial-value.AllowExplicitZeroFirstInitialValue: 'false'
   readability-enum-initial-value.AllowExplicitSequentialInitialValues: 'false'

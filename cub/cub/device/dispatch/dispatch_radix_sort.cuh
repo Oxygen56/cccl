@@ -1057,6 +1057,7 @@ public:
     }
 
     // Force kernel code-generation in all compiler passes
+    // NOLINTNEXTLINE(bugprone-misplaced-widening-cast)
     if (num_items <= static_cast<OffsetT>(policy.single_tile.threads_per_block * policy.single_tile.items_per_thread))
     {
       // Small, single tile size

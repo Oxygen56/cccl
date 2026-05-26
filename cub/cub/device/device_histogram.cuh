@@ -741,6 +741,7 @@ public:
 
     if constexpr (sizeof(OffsetT) > sizeof(int))
     {
+      // NOLINTNEXTLINE(bugprone-misplaced-widening-cast)
       if ((unsigned long long) (num_rows * row_stride_bytes) < (unsigned long long) INT_MAX)
       {
         // Down-convert OffsetT data type
@@ -1448,6 +1449,7 @@ public:
 
     if constexpr (sizeof(OffsetT) > sizeof(int))
     {
+      // NOLINTNEXTLINE(bugprone-misplaced-widening-cast)
       if ((unsigned long long) (num_rows * row_stride_bytes) < (unsigned long long) INT_MAX)
       {
         // Down-convert OffsetT data type
