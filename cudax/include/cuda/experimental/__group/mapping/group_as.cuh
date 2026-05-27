@@ -159,8 +159,12 @@ public:
       const auto __i_count = count(__i);
       if (__prev_unit_rank < __sum + __i_count)
       {
-        return _MappingResult{
-          __ngroups, __prev_mapping_result.group_rank() * __curr_ngroups + __i, __i_count, __prev_unit_rank - __sum};
+        const auto __group_rank = __prev_mapping_result.group_rank() * __curr_ngroups + __i;
+        const auto __n          = __i_count;
+        const auto __rank       = __prev_unit_rank - __sum;
+        const auto __lane_mask =
+          ::cuda::experimental::__make_lane_mask_for_n(__prev_mapping_result.lane_mask(), __n, __rank);
+        return _MappingResult{__ngroups, __group_rank, __n, __rank, __lane_mask};
       }
       __sum += __i_count;
     }
@@ -278,8 +282,12 @@ public:
       const auto __i_count = count(__i);
       if (__prev_unit_rank < __sum + __i_count)
       {
-        return _MappingResult{
-          __ngroups, __prev_mapping_result.group_rank() * __curr_ngroups + __i, __i_count, __prev_unit_rank - __sum};
+        const auto __group_rank = __prev_mapping_result.group_rank() * __curr_ngroups + __i;
+        const auto __n          = __i_count;
+        const auto __rank       = __prev_unit_rank - __sum;
+        const auto __lane_mask =
+          ::cuda::experimental::__make_lane_mask_for_n(__prev_mapping_result.lane_mask(), __n, __rank);
+        return _MappingResult{__ngroups, __group_rank, __n, __rank, __lane_mask};
       }
       __sum += __i_count;
     }
