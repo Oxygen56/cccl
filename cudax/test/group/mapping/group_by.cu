@@ -89,7 +89,7 @@ __device__ void test_group_by(Config config)
       CHECK(result.count() == N);
       CHECK(result.rank() == cuda::gpu_thread.rank(cuda::warp) % N);
 
-      const auto lane_mask_ref = ((N < 32) ? ((1u << N) - 1) : ~0u) << ((cuda::gpu_thread.count(cuda::warp) / N) * N);
+      const auto lane_mask_ref = ((N < 32) ? ((1u << N) - 1) : ~0u) << ((cuda::gpu_thread.rank(cuda::warp) / N) * N);
       CHECK(result.lane_mask() == cuda::device::lane_mask{lane_mask_ref});
 
       CHECK(result.is_valid());
@@ -162,7 +162,7 @@ __device__ void test_group_by(Config config)
       CHECK(result.count() == N);
       CHECK(result.rank() == cuda::gpu_thread.rank(cuda::warp) % N);
 
-      const auto lane_mask_ref = ((N < 32) ? ((1u << N) - 1) : ~0u) << ((cuda::gpu_thread.count(cuda::warp) / N) * N);
+      const auto lane_mask_ref = ((N < 32) ? ((1u << N) - 1) : ~0u) << ((cuda::gpu_thread.rank(cuda::warp) / N) * N);
       CHECK(result.lane_mask() == cuda::device::lane_mask{lane_mask_ref});
 
       CHECK(result.is_valid());
@@ -246,7 +246,7 @@ __device__ void test_group_by_non_exhaustive(Config config)
         CHECK(result.count() == N);
         CHECK(result.rank() == cuda::gpu_thread.rank(cuda::warp) % N);
 
-        const auto lane_mask_ref = ((N < 32) ? ((1u << N) - 1) : ~0u) << ((cuda::gpu_thread.count(cuda::warp) / N) * N);
+        const auto lane_mask_ref = ((N < 32) ? ((1u << N) - 1) : ~0u) << ((cuda::gpu_thread.rank(cuda::warp) / N) * N);
         CHECK(result.lane_mask() == cuda::device::lane_mask{lane_mask_ref});
       }
     }
@@ -324,7 +324,7 @@ __device__ void test_group_by_non_exhaustive(Config config)
         CHECK(result.count() == N);
         CHECK(result.rank() == cuda::gpu_thread.rank(cuda::warp) % N);
 
-        const auto lane_mask_ref = ((N < 32) ? ((1u << N) - 1) : ~0u) << ((cuda::gpu_thread.count(cuda::warp) / N) * N);
+        const auto lane_mask_ref = ((N < 32) ? ((1u << N) - 1) : ~0u) << ((cuda::gpu_thread.rank(cuda::warp) / N) * N);
         CHECK(result.lane_mask() == cuda::device::lane_mask{lane_mask_ref});
       }
     }
