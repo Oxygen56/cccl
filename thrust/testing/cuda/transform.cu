@@ -360,7 +360,7 @@ struct sum_five
   _CCCL_HOST_DEVICE auto operator()(std::int8_t a, std::int16_t b, std::int32_t c, std::int64_t d, float e) const
     -> double
   {
-    return a + b + c + d + e;
+    return a + b + c + static_cast<float>(d) + e;
   }
 };
 

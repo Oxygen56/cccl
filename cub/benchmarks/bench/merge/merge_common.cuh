@@ -103,7 +103,7 @@ generate_lhs_rhs(std::size_t num_items_lhs, std::size_t num_items_rhs, bit_entro
   auto counting_it = thrust::make_counting_iterator(offset_t{0});
   thrust::copy_if(
     counting_it,
-    counting_it + elements,
+    counting_it + static_cast<offset_t>(elements),
     rnd_selector_val.begin(),
     cuda::make_tabulate_output_iterator(write_pivot_point_t<offset_t>{
       static_cast<offset_t>(num_items_lhs), thrust::raw_pointer_cast(pivot_point.data())}),

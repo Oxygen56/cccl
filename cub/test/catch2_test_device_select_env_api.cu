@@ -221,8 +221,13 @@ C2H_TEST("cub::DeviceSelect::Unique with custom equality_op accepts env with str
   cuda::stream stream{cuda::devices[0]};
   cuda::stream_ref stream_ref{stream};
 
-  auto error =
-    cub::DeviceSelect::Unique(input.begin(), output.begin(), num_selected.begin(), input.size(), eq_mod3, stream_ref);
+  auto error = cub::DeviceSelect::Unique(
+    input.begin(),
+    output.begin(),
+    num_selected.begin(),
+    static_cast<::cuda::std::int64_t>(input.size()),
+    eq_mod3,
+    stream_ref);
   if (error != cudaSuccess)
   {
     std::cerr << "cub::DeviceSelect::Unique with custom equality_op failed with status: " << error << '\n';
@@ -279,7 +284,8 @@ C2H_TEST("cub::DeviceSelect::Unique in-place with custom equality_op accepts env
   cuda::stream stream{cuda::devices[0]};
   cuda::stream_ref stream_ref{stream};
 
-  auto error = cub::DeviceSelect::Unique(data.begin(), num_selected.begin(), data.size(), eq_mod3, stream_ref);
+  auto error = cub::DeviceSelect::Unique(
+    data.begin(), num_selected.begin(), static_cast<::cuda::std::int64_t>(data.size()), eq_mod3, stream_ref);
   if (error != cudaSuccess)
   {
     std::cerr << "cub::DeviceSelect::Unique in-place with custom equality_op failed with status: " << error << '\n';

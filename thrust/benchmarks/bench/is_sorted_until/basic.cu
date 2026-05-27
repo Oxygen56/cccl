@@ -14,9 +14,10 @@ template <typename T>
 static void basic(nvbench::state& state, nvbench::type_list<T>)
 {
   // set up input
-  const auto elements       = static_cast<std::size_t>(state.get_int64("Elements"));
-  const auto common_prefix  = state.get_float64("MismatchAt");
-  const auto mismatch_point = ::cuda::std::clamp<std::size_t>(elements * common_prefix, 0ull, elements - 1);
+  const auto elements      = static_cast<std::size_t>(state.get_int64("Elements"));
+  const auto common_prefix = state.get_float64("MismatchAt");
+  const auto mismatch_point =
+    ::cuda::std::clamp<std::size_t>(static_cast<double>(elements) * common_prefix, 0ull, elements - 1);
 
   thrust::device_vector<T> dinput(elements, thrust::no_init);
   thrust::sequence(dinput.begin(), dinput.end(), T{0});
@@ -42,9 +43,10 @@ template <typename T>
 static void with_predicate(nvbench::state& state, nvbench::type_list<T>)
 {
   // set up input
-  const auto elements       = static_cast<std::size_t>(state.get_int64("Elements"));
-  const auto common_prefix  = state.get_float64("MismatchAt");
-  const auto mismatch_point = ::cuda::std::clamp<std::size_t>(elements * common_prefix, 0ull, elements - 1);
+  const auto elements      = static_cast<std::size_t>(state.get_int64("Elements"));
+  const auto common_prefix = state.get_float64("MismatchAt");
+  const auto mismatch_point =
+    ::cuda::std::clamp<std::size_t>(static_cast<double>(elements) * common_prefix, 0ull, elements - 1);
 
   thrust::device_vector<T> dinput(elements, thrust::no_init);
   thrust::sequence(dinput.begin(), dinput.end(), T{0});

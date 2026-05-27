@@ -308,7 +308,7 @@ _CCCL_DEVICE_API _CCCL_FORCEINLINE void kernelBody(
   ////////////////////////////////////////////////////////////////////////////////
 
   // Start with the tile indicated by blockIdx.x
-  int idxTile = specialRegisters.blockIdxX;
+  int idxTile = static_cast<int>(specialRegisters.blockIdxX);
   // Lookback-specific variables:
   int idxTilePrev = 0;
   AccumT sumExclusiveCtaPrev; // only valid in squadLookback lane_0
@@ -837,7 +837,7 @@ template <typename AccumT>
 _CCCL_DEVICE_API _CCCL_FORCEINLINE void
 device_scan_init_warpspeed_body(warpspeed::tile_state_t<AccumT>* tile_states, const int num_temp_states)
 {
-  const int tile_id = blockDim.x * blockIdx.x + threadIdx.x;
+  const int tile_id = static_cast<int>(blockDim.x * blockIdx.x + threadIdx.x);
   if (tile_id >= num_temp_states)
   {
     return;

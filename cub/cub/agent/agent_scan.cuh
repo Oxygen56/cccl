@@ -382,7 +382,7 @@ struct AgentScan
     // block
 
     // Current tile index
-    int tile_idx = start_tile + blockIdx.x;
+    int tile_idx = static_cast<int>(start_tile + blockIdx.x);
 
     // Global offset for the current tile
     OffsetT tile_offset = OffsetT(TILE_ITEMS) * tile_idx;
